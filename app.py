@@ -24,7 +24,7 @@ async def catch_exception_handler(request: Request, exc: Exception):
 
 @app.get('/')
 def read_root():
-    return {"welcome": "Welcome to my API"}
+    return {"Bienvenido": "Con esta API-REST se podrá administrar aplicantes, vacantes y sugerir cargos"}
 app.include_router(user)
 app.include_router(vacancy)
 app.include_router(recomendation)
