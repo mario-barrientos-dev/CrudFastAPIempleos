@@ -25,7 +25,7 @@ $ git clone mario-barrientos-dev/CrudFastAPIempleos
 $ conda activate (env de destino dentro de la carpeta)
 $ uvicorn app:app --reload
 ```
-Pueden realizarse pruebas de la API de manera libre siempre y cuando tengan las tecnologías instaladas
+Pueden realizarse pruebas de la API de manera libre siempre y cuando tengan las tecnologías instaladas, se recomienda reinstalar fastapi a nivel env y desplegarlo con uvicorn
 
 ## FAQs
 ***
