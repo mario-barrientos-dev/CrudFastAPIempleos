@@ -2,11 +2,15 @@ version: "3.9"
 services:
   apicrud:
     image: python=3.9.13
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev .
     ports:
       - "3000:3000"
     links:
       - mongoapi
+    volumes:
+      - .:/home/app
   mongoapi:
     image: mongo
     ports:
