@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  apicrud:
+    image: python=3.9.13
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - mongoapi
+  mongoapi:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=test
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db
+      
+
+volumes:
+  mongo-data:
