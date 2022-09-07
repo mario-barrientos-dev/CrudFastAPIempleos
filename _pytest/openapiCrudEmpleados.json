@@ -1,1 +1,611 @@
-{"openapi":"3.0.2","info":{"title":"FastAPI para la creación y gestión de aspirantes a cargos, comparar experiéncia y recomendar cargos","description":"Esta es una API-REST con la cúal se podrá crear Aspirantes y Empresas y cotejar requerimientos","version":"0.0.1"},"paths":{"/":{"get":{"summary":"Read Root","operationId":"read_root__get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/users":{"get":{"tags":["Aspirantes"],"summary":"Find All Users","operationId":"find_all_users_users_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}},"post":{"tags":["Aspirantes"],"summary":"Cerate Users","operationId":"cerate_users_users_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/users/{UserId}":{"get":{"tags":["Aspirantes"],"summary":"Find User","operationId":"find_user_users__UserId__get","parameters":[{"required":true,"schema":{"title":"Userid","type":"string"},"name":"UserId","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}},"put":{"tags":["Aspirantes"],"summary":"Update Users","operationId":"update_users_users__UserId__put","parameters":[{"required":true,"schema":{"title":"Userid","type":"string"},"name":"UserId","in":"path"}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/users/{id}":{"delete":{"tags":["Aspirantes"],"summary":"Delete Users","operationId":"delete_users_users__id__delete","parameters":[{"required":true,"schema":{"title":"Id","type":"string"},"name":"id","in":"path"}],"responses":{"204":{"description":"Successful Response"},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/vacancy":{"get":{"tags":["Vacantes"],"summary":"Find All Vacancies","operationId":"find_all_vacancies_vacancy_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}},"post":{"tags":["Vacantes"],"summary":"Cerate Vacancy","operationId":"cerate_vacancy_vacancy_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Vacancy"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Vacancy"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/vacancy/{VacancyId}":{"get":{"tags":["Vacantes"],"summary":"Find Vacancy","operationId":"find_vacancy_vacancy__VacancyId__get","parameters":[{"required":true,"schema":{"title":"Vacancyid","type":"string"},"name":"VacancyId","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Vacancy"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}},"put":{"tags":["Vacantes"],"summary":"Update Vacancy","operationId":"update_vacancy_vacancy__VacancyId__put","parameters":[{"required":true,"schema":{"title":"Vacancyid","type":"string"},"name":"VacancyId","in":"path"}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Vacancy"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Vacancy"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/vacancy/{id}":{"delete":{"tags":["Vacantes"],"summary":"Delete Vacancy","operationId":"delete_vacancy_vacancy__id__delete","parameters":[{"required":true,"schema":{"title":"Id","type":"string"},"name":"id","in":"path"}],"responses":{"204":{"description":"Successful Response"},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/recomendation/{UserId}":{"get":{"tags":["Recomendacion de empleo"],"summary":"Recomendation Job","operationId":"recomendation_job_recomendation__UserId__get","parameters":[{"required":true,"schema":{"title":"Userid","type":"string"},"name":"UserId","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}}},"components":{"schemas":{"HTTPValidationError":{"title":"HTTPValidationError","type":"object","properties":{"detail":{"title":"Detail","type":"array","items":{"$ref":"#/components/schemas/ValidationError"}}}},"RequiredSkill":{"title":"RequiredSkill","required":["Python","NoSql"],"type":"object","properties":{"Python":{"title":"Python","type":"integer"},"NoSql":{"title":"Nosql","type":"integer"}}},"Skill":{"title":"Skill","required":["Python","NoSql"],"type":"object","properties":{"Python":{"title":"Python","type":"integer"},"NoSql":{"title":"Nosql","type":"integer"}}},"User":{"title":"User","required":["FirstName","LastName","Email","YearsPreviousExperience"],"type":"object","properties":{"UserId":{"title":"Userid","type":"string"},"FirstName":{"title":"Firstname","type":"string"},"LastName":{"title":"Lastname","type":"string"},"Email":{"title":"Email","type":"string"},"YearsPreviousExperience":{"title":"Yearspreviousexperience","type":"string"},"Skills":{"$ref":"#/components/schemas/Skill"}}},"Vacancy":{"title":"Vacancy","required":["PositionName","CompanyName","Salary","Currency","VacancyLink"],"type":"object","properties":{"VacancyId":{"title":"Vacancyid","type":"string"},"PositionName":{"title":"Positionname","type":"string"},"CompanyName":{"title":"Companyname","type":"string"},"Salary":{"title":"Salary","type":"string"},"Currency":{"title":"Currency","type":"string"},"VacancyLink":{"title":"Vacancylink","type":"string"},"RequiredSkills":{"$ref":"#/components/schemas/RequiredSkill"}}},"ValidationError":{"title":"ValidationError","required":["loc","msg","type"],"type":"object","properties":{"loc":{"title":"Location","type":"array","items":{"anyOf":[{"type":"string"},{"type":"integer"}]}},"msg":{"title":"Message","type":"string"},"type":{"title":"Error Type","type":"string"}}}}},"tags":[{"name":"Aspirantes","description":"Rutas disponibles para el servicio de Aspirantes"},{"name":"Vacantes","description":"Rutas disponibles para el servicio de Vacantes"},{"name":"Recomendación de empleo","description":"Servicio de recomendación"}]}
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "FastAPI para la creación y gestión de aspirantes a cargos, comparar experiéncia y recomendar cargos",
+        "description": "Esta es una API-REST con la cúal se podrá crear Aspirantes y Empresas y cotejar requerimientos",
+        "version": "0.0.1"
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "Read Root",
+                "operationId": "read_root__get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Aspirantes"
+                ],
+                "summary": "Find All Users",
+                "operationId": "find_all_users_users_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Aspirantes"
+                ],
+                "summary": "Cerate Users",
+                "operationId": "cerate_users_users_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{UserId}": {
+            "get": {
+                "tags": [
+                    "Aspirantes"
+                ],
+                "summary": "Find User",
+                "operationId": "find_user_users__UserId__get",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Userid",
+                            "type": "string"
+                        },
+                        "name": "UserId",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Aspirantes"
+                ],
+                "summary": "Update Users",
+                "operationId": "update_users_users__UserId__put",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Userid",
+                            "type": "string"
+                        },
+                        "name": "UserId",
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "delete": {
+                "tags": [
+                    "Aspirantes"
+                ],
+                "summary": "Delete Users",
+                "operationId": "delete_users_users__id__delete",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Id",
+                            "type": "string"
+                        },
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vacancy": {
+            "get": {
+                "tags": [
+                    "Vacantes"
+                ],
+                "summary": "Find All Vacancies",
+                "operationId": "find_all_vacancies_vacancy_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Vacantes"
+                ],
+                "summary": "Cerate Vacancy",
+                "operationId": "cerate_vacancy_vacancy_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Vacancy"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Vacancy"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vacancy/{VacancyId}": {
+            "get": {
+                "tags": [
+                    "Vacantes"
+                ],
+                "summary": "Find Vacancy",
+                "operationId": "find_vacancy_vacancy__VacancyId__get",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Vacancyid",
+                            "type": "string"
+                        },
+                        "name": "VacancyId",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Vacancy"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Vacantes"
+                ],
+                "summary": "Update Vacancy",
+                "operationId": "update_vacancy_vacancy__VacancyId__put",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Vacancyid",
+                            "type": "string"
+                        },
+                        "name": "VacancyId",
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Vacancy"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Vacancy"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vacancy/{id}": {
+            "delete": {
+                "tags": [
+                    "Vacantes"
+                ],
+                "summary": "Delete Vacancy",
+                "operationId": "delete_vacancy_vacancy__id__delete",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Id",
+                            "type": "string"
+                        },
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/recomendation/{UserId}": {
+            "get": {
+                "tags": [
+                    "Recomendacion de empleo"
+                ],
+                "summary": "Recomendation Job",
+                "operationId": "recomendation_job_recomendation__UserId__get",
+                "parameters": [
+                    {
+                        "required": true,
+                        "schema": {
+                            "title": "Userid",
+                            "type": "string"
+                        },
+                        "name": "UserId",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "HTTPValidationError": {
+                "title": "HTTPValidationError",
+                "type": "object",
+                "properties": {
+                    "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        }
+                    }
+                }
+            },
+            "RequiredSkill": {
+                "title": "RequiredSkill",
+                "required": [
+                    "Python",
+                    "NoSql"
+                ],
+                "type": "object",
+                "properties": {
+                    "Python": {
+                        "title": "Python",
+                        "type": "integer"
+                    },
+                    "NoSql": {
+                        "title": "Nosql",
+                        "type": "integer"
+                    }
+                }
+            },
+            "Skill": {
+                "title": "Skill",
+                "required": [
+                    "Python",
+                    "NoSql"
+                ],
+                "type": "object",
+                "properties": {
+                    "Python": {
+                        "title": "Python",
+                        "type": "integer"
+                    },
+                    "NoSql": {
+                        "title": "Nosql",
+                        "type": "integer"
+                    }
+                }
+            },
+            "User": {
+                "title": "User",
+                "required": [
+                    "FirstName",
+                    "LastName",
+                    "Email",
+                    "YearsPreviousExperience"
+                ],
+                "type": "object",
+                "properties": {
+                    "UserId": {
+                        "title": "Userid",
+                        "type": "string"
+                    },
+                    "FirstName": {
+                        "title": "Firstname",
+                        "type": "string"
+                    },
+                    "LastName": {
+                        "title": "Lastname",
+                        "type": "string"
+                    },
+                    "Email": {
+                        "title": "Email",
+                        "type": "string"
+                    },
+                    "YearsPreviousExperience": {
+                        "title": "Yearspreviousexperience",
+                        "type": "string"
+                    },
+                    "Skills": {
+                        "$ref": "#/components/schemas/Skill"
+                    }
+                }
+            },
+            "Vacancy": {
+                "title": "Vacancy",
+                "required": [
+                    "PositionName",
+                    "CompanyName",
+                    "Salary",
+                    "Currency",
+                    "VacancyLink"
+                ],
+                "type": "object",
+                "properties": {
+                    "VacancyId": {
+                        "title": "Vacancyid",
+                        "type": "string"
+                    },
+                    "PositionName": {
+                        "title": "Positionname",
+                        "type": "string"
+                    },
+                    "CompanyName": {
+                        "title": "Companyname",
+                        "type": "string"
+                    },
+                    "Salary": {
+                        "title": "Salary",
+                        "type": "string"
+                    },
+                    "Currency": {
+                        "title": "Currency",
+                        "type": "string"
+                    },
+                    "VacancyLink": {
+                        "title": "Vacancylink",
+                        "type": "string"
+                    },
+                    "RequiredSkills": {
+                        "$ref": "#/components/schemas/RequiredSkill"
+                    }
+                }
+            },
+            "ValidationError": {
+                "title": "ValidationError",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "type": "object",
+                "properties": {
+                    "loc": {
+                        "title": "Location",
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        }
+                    },
+                    "msg": {
+                        "title": "Message",
+                        "type": "string"
+                    },
+                    "type": {
+                        "title": "Error Type",
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Aspirantes",
+            "description": "Rutas disponibles para el servicio de Aspirantes"
+        },
+        {
+            "name": "Vacantes",
+            "description": "Rutas disponibles para el servicio de Vacantes"
+        },
+        {
+            "name": "Recomendación de empleo",
+            "description": "Servicio de recomendación"
+        }
+    ]
+}
